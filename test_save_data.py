@@ -46,20 +46,14 @@ print ("ret:",ret  )
 print ("mtx:\n",mtx )       # 内参数矩阵                                                  
 print ("dist:\n",dist)      # 畸变系数   distortion cofficients = (k_1,k_2,p_1,p_2,k_3)   
 print ("rvecs:\n",rvecs)    # 旋转向量  # 外参数                                          
-print ("tvecs:\n",tvecs )   # 平移向量  # 外参数                                          
+print ("tvecs:\n",tvecs )   # 平移向量  # 外参数     
+# print ("objpoints\n", objpoints)
+# print ("imgpoints\n", imgpoints)
 
-f = open('data_R_ret.txt','w')
-f.write(str(ret))
-f.close()
-f = open('data_R_mtx.txt','w')
-f.write(str(mtx))
-f.close()
-f = open('data_R_dist.txt','w')
-f.write(str(dist))
-f.close()
-f = open('data_R_rvecs.txt','w')
-f.write(str(rvecs))
-f.close()
-f = open('data_R_tvecs.txt','w')
-f.write(str(tvecs))
-f.close()
+# Save
+ret, rvecs, tvecs = np.array(ret), np.array(rvecs), np.array(tvecs)
+data = [ ret, mtx, dist, rvecs, tvecs, objpoints, imgpoints ]
+filenames = [   'data_R_ret.npy', 'data_R_mtx.npy', 'data_R_dist.npy', 'data_R_rvecs.npy', 'data_R_tvecs.npy', 
+                'data_R_objpoints.npy', 'data_R_imgpoints.npy' ]
+for arr, filename in zip(data, filenames):
+    np.save(filename, arr)

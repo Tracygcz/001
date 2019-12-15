@@ -1,33 +1,17 @@
-import numpy
+import numpy as np
 import cv2
 import glob
 
-f = open('data_R_ret.txt','r')
-ret = float(f.read())
-print(ret)
-print(type(ret))
-f.close()
-f = open('data_R_mtx.txt','r')
-mtx = numpy.array(f.read())
-print(mtx)
-print(type(mtx))
-f.close()
-f = open('data_R_dist.txt','r')
-dist = numpy.array(f.read())
-print(dist)
-print(type(dist))
-f.close()
-f = open('data_R_rvecs.txt','r')
-rvecs = f.read()
-print(rvecs)
-print(type(rvecs))
-f.close()
-f = open('data_R_tvecs.txt','r')
-tvecs = f.read()
-print(tvecs)
-print(type(tvecs))
-f.close()
-
+# Read
+filenames = [   'data_R_ret.npy', 'data_R_mtx.npy', 'data_R_dist.npy', 'data_R_rvecs.npy', 'data_R_tvecs.npy', 
+                'data_R_objpoints.npy', 'data_R_imgpoints.npy' ]
+data = []
+for filename in filenames:
+    arr = np.load(filename)
+    data.append(arr)
+ret, mtx, dist, rvecs, tvecs, objpoints, imgpoints = data
+convert = lambda arr: [ np.array(x) for x in arr.tolist() ]
+ret, rvecs, tvecs, objpoints, imgpoints = ret.tolist(), convert(rvecs), convert(tvecs), convert(objpoints), convert(imgpoints)
 
 # 畸变校正
 images = glob.glob('R.jpg')
