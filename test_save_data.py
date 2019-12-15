@@ -13,7 +13,7 @@ objp[:,:2] = np.mgrid[0:9,0:6].T.reshape(-1,2)
 objpoints = [] # 存储3D点
 imgpoints = [] # 存储2D点
 
-images = glob.glob('F:/001/R.jpg') # 文件存储路径，存储需要标定的摄像头拍摄的棋盘格图片
+images = glob.glob('R.jpg') # 文件存储路径，存储需要标定的摄像头拍摄的棋盘格图片
 
 for fname in images:
     img = cv2.imread(fname)
@@ -48,18 +48,18 @@ print ("dist:\n",dist)      # 畸变系数   distortion cofficients = (k_1,k_2,p
 print ("rvecs:\n",rvecs)    # 旋转向量  # 外参数                                          
 print ("tvecs:\n",tvecs )   # 平移向量  # 外参数                                          
 
-f = open('F:/001/data_R_ret.txt','w')
+f = open('data_R_ret.txt','w')
 f.write(str(ret))
 f.close()
-f = open('F:/001/data_R_mtx.txt','w')
+f = open('data_R_mtx.txt','w')
 f.write(str(mtx))
 f.close()
-f = open('F:/001/data_R_dist.txt','w')
+f = open('data_R_dist.txt','w')
 f.write(str(dist))
 f.close()
-f = open('F:/001/data_R_rvecs.txt','w')
+f = open('data_R_rvecs.txt','w')
 f.write(str(rvecs))
 f.close()
-f = open('F:/001/data_R_tvecs.txt','w')
+f = open('data_R_tvecs.txt','w')
 f.write(str(tvecs))
 f.close()
